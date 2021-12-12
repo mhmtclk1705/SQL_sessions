@@ -1,5 +1,5 @@
 /*===================================================
-														LIMIT
+	LIMIT
 ====================================================*/
  	/*invoices tablosunda Total değeri 10$'dan büyük olan ilk 4 kayıt'ın InvoiceId, 
 	InvoiceDate ve total bilgilerini sorgulayiniz */
@@ -10,7 +10,7 @@
 	
 	
 /*===================================================
-													ORDER BY
+	ORDER BY
 ====================================================*/
 	
 	/*invoices tablosunda Total değeri 10$'dan büyük olan kayıtları Total değerine göre 
@@ -31,7 +31,7 @@
 	
 			
 /*===================================================
-								 LOGICAL OPERATORS (AND,OR,NOT)
+	LOGICAL OPERATORS (AND,OR,NOT)
 ====================================================*/
 
 	/* invoices tablosunda ülkesi (BillingCountry) USA olmayan kayıtları total değerine
@@ -68,7 +68,7 @@
 	
 	
 /*===================================================
-								                   IN
+	 IN
 ====================================================*/
 	/* customers tablosunda Belgium, Norway veya  Canada ,USA  ülkelerinden sipariş veren
 		müşterilerin FirstName, LastName, country bilgilerini listeyiniz	*/
@@ -79,7 +79,7 @@
 	
 	
 /*===================================================
-								                    LIKE
+	 LIKE
 ====================================================*/
 	/* tracks tablosunda Composer sutunu Bach ile biten kayıtların Name bilgilerini 
 	listeyen sorguyu yazınız*/
@@ -90,15 +90,31 @@
 	
 	/* albulms tablosunda Title (başlık) sutununda Greatest içeren kayıtların tüm bilgilerini 
 	listeyen sorguyu yazınız*/
+	SELECT *
+	FROM albums
+	WHERE Title LIKE '%Greatest%';
 	
-    SELECT * 
-    FROM albums 
-    WHERE Title LIKE "%Greatest%";
-
-    	/* invoices tablosunda, 2010 ve 2019 arası bir tarihte (InvoiceDate) Sadece şubat
+	/* invoices tablosunda, 2010 ve 2019 arası bir tarihte (InvoiceDate) Sadece şubat
 	aylarında gerçekleşmiş olan faturaların	tüm bilgilerini listeleyen sorguyu yazınız*/
+	
+	SELECT *
+	FROM invoices
+	WHERE InvoiceDate like '201_-02%';
+	
+	
+	/* customers tablosunda, isimleri (FirstName) üç harfli olan müşterilerin FirstName, 
+	LastName ve City bilgilerini	listeleyen sorguyu yazınız*/
+	
 
-    SELECT *
-    FROM invoices
-    WHERE InvoiceDate LIKE '201_-02%';
+	SELECT FirstName, LastName,City
+	FROM customers
+	WHERE FirstName LIKE '___' ;
+	
+	/* customers tablosunda, soyisimleri Sch veya Go ile başlayan müşterilerin FirstName, 
+	LastName ve City bilgilerini listeleyen sorguyu yazınız*/
+	
 
+	SELECT FirstName, LastName,City
+	FROM customers
+	WHERE LastName LIKE 'Go%' OR LastName LIKE 'Sch%' ;
+	
