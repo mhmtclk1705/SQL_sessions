@@ -1,8 +1,7 @@
 -- How many tracks does each album have? Your solution should include Album id and its 
 -- number of tracks sorted from highest to lowest.
 
-SELECT AlbumId, TrackId
-FROM 
+
 
 -- Find the album title of the tracks. Your solution should include track name and its 
 -- album title.
