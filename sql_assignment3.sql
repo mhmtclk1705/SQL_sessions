@@ -28,8 +28,20 @@ ORDER by Bytes DESC;
 --are Jane Peacock and Margaret Park. Your query should include CustomerID, First Name 
 --and Last Name of the customers.
 
+SELECT CustomerId,FirstName,LastName
+FROM customers
+WHERE SupportRepId IN ( SELECT EmployeeId
+                        FROM employees
+                        WHERE FirstName IN ('Jane','Margaret') and LastName IN('Peacock','Park'));
+
 
 --Rewrite the subquery above using the JOIN.
+
+SELECT c.CustomerId,c.FirstName,c.LastName
+FROM customers c
+JOIN employees e
+ON c.SupportRepId = e.EmployeeId
+WHERE e.FirstName IN ('Jane','Margaret') and e.LastName IN('Peacock','Park');
 
 --   DDL (CREATE, ALTER, DELETE) and DML (SELECT, INSERT, UPDATE, DELETE) Statements
 
@@ -42,11 +54,40 @@ ORDER by Bytes DESC;
  --                   EmployeeId (Foreign Key - Refers to EmployeeId of employees table ) 
  --                   CoursePrice
 
+CREATE TABLE courses 
+(   CourseId INT,
+    CourseName TEXT DEFAULT 'NONAME',
+    EmployeeId INT,
+    CoursePrice REAL,
+    PRIMARY KEY(CourseId),
+    FOREIGN KEY(EmployeeId) REFERENCES employees(EmployeeId));
+
  --     2. Insert at least 5 rows into the courses table. Your EmployeeId should contain the values of the EmployeeId column on the employees table. You’re free to choose any values for other columns (CourseId, CourseName, CoursePrice)
+
+INSERT INTO courses
+VALUES      (1,'FullStack',1,1200),
+            (2,'DataScience',2,1300),
+            (3,'AWS',3,1400),
+            (4,'DevOps',4,1500),
+            (5,'CyberSecurity',5,1600);
+
 --Delete the last row of your courses table.
+
+DELETE 
+FROM courses 
+WHERE CourseId = (  SELECT max(CourseId) 
+                    FROM courses);
 
 --Add a new column to your courses table named StartDate. The new column cannot be null.
 
+ALTER TABLE courses
+ADD COLUMN StartDate DATE NOT NULL DEFAULT 0;
+
 --Delete the CoursePrice column.
 
+ALTER TABLE courses
+DROP COLUMN CoursePrice;
+
 --Delete the courses table.
+
+DROP TABLE courses;
